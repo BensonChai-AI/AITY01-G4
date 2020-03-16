@@ -1,0 +1,26 @@
+<annotation>
+	<folder>1.video</folder>
+	<filename>1_0002.png</filename>
+	<path>C:\Users\A30\PycharmProjects\Videocut\1.video\1_0002.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>720</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Pothole</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>436</xmin>
+			<ymin>468</ymin>
+			<xmax>805</xmax>
+			<ymax>519</ymax>
+		</bndbox>
+	</object>
+</annotation>
