@@ -34,9 +34,9 @@
   
 檔案說明:  
 先準備套件，要先自行將要用到的套件下載至資料夾，這個專題有三個套件要自己額外安裝  
-matplotlib: 去下載 linux 的 whl 檔案安裝  
-kiwisolver: 去下載 linux 的 whl 檔案安裝  
-psycopg2: 有人準備好了https://github.com/jkehler/awslambda-psycopg2  
+matplotlib: 去下載 linux 的 whl 檔案安裝，然後安裝到 "套件\"  
+kiwisolver: 去下載 linux 的 whl 檔案安裝，然後安裝到 "套件\"  
+psycopg2: 直接下載到 "套件\"，有人準備好了https://github.com/jkehler/awslambda-psycopg2  
   
 將 "套件\awslambda-psycopg2-master\with_ssl_support\psycopg2-3.6" 複製出來因為我們要用這版本  
 將 "套件\kiwisolver_linux\" 跟 "套件\matplotlib_linux\" 複製放到 "lambda-requirements\" 然後直接 zip 上傳至 S3 的 aiprojects3 儲存貯體  
