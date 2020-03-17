@@ -24,3 +24,14 @@ server_url 佈署時填寫
 啟動後加入 line 頻道進行測試  
 由於上傳檔案限制 trained_weights_final.h5 無法上傳至 github 請組員自行放至此路徑下  
   
+6. 檔案說明:  
+Step1_UserRichMenu.ipynb 與 rich_menu_images/: 用來上傳(或修改刪除)圖文選單  
+QRcode/: 放 QR code 圖檔，用於分享好友的三個方式之一  
+demo_images/: 放的是使用者輸入 "測試" 的時候給測試圖片  
+yolo3_test/: yolo3 測試程式  
+Procfile, requirements.txt, runtime.txt: 部屬至 Heroku 的時候需要的設定檔  
+my_database.py: 存取 PostgreSQL, S3 及本地端檔案 (裡面相關設定跟金鑰等已移除，請根據自己的填寫)  
+app.py, line_secret_key: Line Chat Bot主程式即設定檔  
+套件.txt: 套件版本說明  
+  
+備註: AWS 的金鑰不要寫在 code 裡面上傳到 github，會被 Amazon 偵測到寄信通知
