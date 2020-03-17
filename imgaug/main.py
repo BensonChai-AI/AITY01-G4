@@ -61,8 +61,8 @@ def change_xml_list_annotation(root, image_id, new_target, saveroot, id):
     xmlroot = tree.getroot()
     index = 0
 
-    for object in xmlroot.findall('object'):  # 找到root节点下的所有country节点
-        bndbox = object.find('bndbox')  # 子节点下节点rank的值
+    for object in xmlroot.findall('object'):  # 找到root節點下的所有country節點
+        bndbox = object.find('bndbox')  # 子節點下節點rank的值
 
         # xmin = int(bndbox.find('xmin').text)
         # xmax = int(bndbox.find('xmax').text)
