@@ -1,0 +1,16 @@
+Python 3.7.3 64-bit
+
+Line bot
+1. flash
+2. line-bot-sdk
+
+Database
+1. psycopg2
+2. boto3
+
+Yolo3 (於本機執行模型時候需要，若要遠端部屬模型則不用，版本列出僅供參考，這是有實際跑過的組合)
+1. keras==2.3.1
+2. tensorflow==1.14.0
+3. numpy==1.18.1
+4. pillow==7.0.0
+5. matplotlib==3.2.0

@@ -1,0 +1,11 @@
+line-bot-sdk
+flask
+psycopg2
+boto3
+requests
+pytz
+#Keras==2.3.1
+#tensorflow==1.14.0
+#numpy
+#Pillow
+#matplotlib
