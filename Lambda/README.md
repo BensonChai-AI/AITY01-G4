@@ -42,6 +42,7 @@ psycopg2: 有人準備好了https://github.com/jkehler/awslambda-psycopg2
 將 "套件\kiwisolver_linux\" 跟 "套件\matplotlib_linux\" 複製放到 "lambda-requirements\" 然後直接 zip 上傳至 S3 的 aiprojects3 儲存貯體  
 ![image](https://github.com/broodkey/AITY01-G4/blob/master/Lambda/md_images/MD%208.png)  
 將 模型權重檔 trained_weights_final.h5 上傳至 S3 的 aiprojects3 儲存貯體  
+(trained_weights_final.h5 檔案太大無法上傳github，請從其他方式取得)
 將下圖檔案一起 zip 後，使用 zip 上傳到 lambda，然後切換成 編輯內嵌程式碼，可以查看編輯  
 ![image](https://github.com/broodkey/AITY01-G4/blob/master/Lambda/md_images/MD%209.png)  
 font\, model_data\, yolo3\, detect.py:是 yolo3 的測試函式  
