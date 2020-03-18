@@ -1,0 +1,4 @@
+建立新資料夾
+使用 cmd
+移動到該資料夾下
+pip install XXXXXXX.whl -t .
