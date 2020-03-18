@@ -1,0 +1,40 @@
+﻿一、檔案夾部分:
+1.assets裡的
+(1)css:決定html裡的文字，版型，大小，顏色
+(2)fonts:基本不用動
+(3)js:給動態回應
+
+2.images:
+html裡所需呈現的圖片都放在這
+
+3.json_files:
+(1)detect.txt:
+為了防止git上去heroku的時候，因判斷這是空白資料夾而自動刪除這個資料夾而設的文件
+(2)test.json:
+到時跑完main.py檔會產生的文件，裡面存放者從資料撈完後所產生的google map標記時需要的資訊
+
+4.road_images:
+為了防止git上去heroku的時候，因判斷這是空白資料夾而自動刪除這個資料夾而設的圖片
+跑完main.py後會在裡面產生從資料庫撈完後預測的圖檔
+
+5.templates:
+存放html這個網頁主架構
+
+二、檔案:
+(ps.僅是紀錄，設定要去html裡面設定)
+在index.html的142行
+src="https://maps.googleapis.com/maps/api/js?key=(設置成自己的map api 金鑰碼)&callback=initMap">
+
+2.main.py:
+用flask創立的輕型網頁架構裡面有
+(1)從資料庫撈資料
+(2)創立google map api 標記所需的json至json_files
+(3)建立預測圖檔至road_images
+
+接下來3個檔案室上傳至heroku所需的設定檔
+1.Procfile:讓heroku設定說從哪個檔案開啟(設定從main)
+
+2.requirements.txt:設定說需要那些套件及版本列出名稱，讓heroku幫我們下載
+(可以用"pip freeze > requirements.txt"將目前電腦裡的套件直接打包)
+
+3.runtime.txt:設定要要跑的python版本

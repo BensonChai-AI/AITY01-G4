@@ -1,0 +1,435 @@
+<!-- 總結 : HTML單純排版，中間插入script近似於import功能，並不會直接呈現。各區塊(<div><col>)的初始設定在CSS裡，若寫在head或style = ...則為該區塊裡的優先設定。所有的class皆能在CSS找到，寫明各種特性 -->
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>路見不平</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />	
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"><a href="index.html">Edited <span>by Ingram</span></a></div>
+			</header>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner" style="font-family:Microsoft JhengHei;">
+					<header>
+						<h1>路見不平?</h1>
+						<p>路見不平之外<br />我們還能做些什麼呢?</p>
+					</header>
+					<a href="#main" class="button big scrolly">路洞地圖</a>
+				</div>
+			</section>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Section -->
+					<section class="wrapper style1">
+						<div class="inner">
+							<!-- 2 Columns -->
+								<div class="flex flex-2" >
+									<div class="col col2" >										
+										<!DOCTYPE html>
+											<!-- 在head設定body部分元件的屬性  -->										
+											<head>
+												<style>
+												/* Always set the map height explicitly to define the size of the div
+												* element that contains the map. */
+												#map {
+													height: 100%;
+												}
+												/* Optional: Makes the sample page fill the window. */
+												html, body {
+													height: 100%;
+													margin: 0;
+													padding: 0;
+												}	
+												
+												#floating-panel {
+													position: absolute;
+													top: 2%;
+													left: 25%;
+													z-index: 5;
+													background-color: #fff;
+													padding: 5px;
+													border: 1px solid #999;
+													text-align: center;
+													font-family: 'Roboto','sans-serif';
+													line-height: 30px;
+													padding-left: 10px;
+												}
+												</style>															
+											</head>
+											<!-- body設定個元素的排版 -->
+											<body>
+												<!-- 搜尋框 -->
+												<div id="floating-panel">
+													<input id="address" type="textbox" value=" ">
+													<input id="submit" type="button" value="搜尋">
+												</div>			
+												<div id="map"></div>												
+												<script>
+												var map;
+													
+												function initMap() {
+													map = new google.maps.Map(document.getElementById('map'), {
+														zoom: 12,
+														gestureHandling: 'greedy',
+														center: new google.maps.LatLng(24.9537, 121.2256),
+														mapTypeId: 'roadmap'
+													});
+													// 以下設定Markers跟infowindow
+													fetch(src = "../json_files/test.json")
+														.then(res => {return res.json();})
+														.then(result => { 	
+															console.log(result);
+
+															this.features = result.a;
+															for (const i of features) {
+																const marker = new google.maps.Marker({position: {lat: i.lat, lng: i.lng},
+																	map: map,
+																	animation: google.maps.Animation.DROP,
+																	draggable: false
+																});	
+
+																const pic = "'../road_images/" + i.pre_name + "'";
+																const content_pic =
+																	'<div id="content">'+
+																	'<div id="bodyContent">'+
+																	'<img src=' + pic +' width="320" height="300" />' +
+																	'</div>'+
+																	'</div>';
+
+																const infowindow = new google.maps.InfoWindow({
+																	content:"上傳時間:" + i.time + "<br />" + "坑洞地點:" + i.address + "<br />" + content_pic,
+																	maxWidth: 320
+																});	
+																	marker.addListener('click', function() {
+																	infowindow.open(map, marker);
+																});
+															}
+														})
+													// 以下設置讓搜尋結果能改變Map API的狀態																																																																													
+													var geocoder = new google.maps.Geocoder();
+													document.getElementById('submit').addEventListener('click', function() {
+														geocodeAddress(geocoder, map);
+													});													
+												}
+												// 搜尋框設定
+												function geocodeAddress(geocoder, resultsMap) {
+													var address = document.getElementById('address').value;
+													geocoder.geocode({'address': address}, function(results, status) {
+													if (status === 'OK') {
+														resultsMap.setCenter(results[0].geometry.location);
+														// var marker = new google.maps.Marker({
+														// map: resultsMap,
+														// position: results[0].geometry.location
+														// });
+													} else {
+														alert('Geocode was not successful for the following reason: ' + status);
+													}
+													});	
+												}																										
+												</script>
+												<!-- 以下才是讓API出現的程式，function initMap只有定義方法 -->					
+												<script async defer
+												src="https://maps.googleapis.com/maps/api/js?key=(替換成自己的map api 金鑰碼)=initMap">
+												</script>
+											</body>	
+									</div> 
+									<div class="col col1">
+										<h3 class="align-center">最新數據</h3>										
+										<head>
+											<meta charset="utf-8">
+											<title>JS Bin</title>
+										</head>
+										<body>
+											<!-- <header>即時資訊</header> -->
+											<nav>
+												<ul>													
+													<li id = "list1"></li>
+													<li id = "list2"></li>
+													<li id = "list3"></li>
+													<li id = "list4"></li>
+													<li id = "list5"></li>
+													<li id = "list6"></li>
+													<li id = "list7"></li>
+													<li id = "list8"></li>
+													<li id = "list9"></li>
+													<li id = "list10"></li>																																 -->
+												</ul>
+												<script>
+													fetch("../json_files/test.json")
+														.then(res => {return res.json();})
+														.then(result => { 	
+															console.log(result);														
+															var list = result.a;
+
+															// 抓取對應標籤並寫入(innerHTML)相應資料
+															document.getElementById("list1").innerHTML="時間:" + list[list.length-1].time + "<br />" + "地點:" + list[list.length-1].address;
+															document.getElementById("list2").innerHTML="時間:" + list[list.length-2].time + "<br />" + "地點:" + list[list.length-2].address;
+															document.getElementById("list3").innerHTML="時間:" + list[list.length-3].time + "<br />" + "地點:" + list[list.length-3].address;
+															document.getElementById("list4").innerHTML="時間:" + list[list.length-4].time + "<br />" + "地點:" + list[list.length-4].address;
+															document.getElementById("list5").innerHTML="時間:" + list[list.length-5].time + "<br />" + "地點:" + list[list.length-5].address;
+															document.getElementById("list6").innerHTML="時間:" + list[list.length-6].time + "<br />" + "地點:" + list[list.length-6].address;
+															document.getElementById("list7").innerHTML="時間:" + list[list.length-7].time + "<br />" + "地點:" + list[list.length-7].address;
+															document.getElementById("list8").innerHTML="時間:" + list[list.length-8].time + "<br />" + "地點:" + list[list.length-8].address;
+															document.getElementById("list9").innerHTML="時間:" + list[list.length-9].time + "<br />" + "地點:" + list[list.length-9].address;
+															document.getElementById("list10").innerHTML="時間:" + list[list.length-10].time + "<br />" + "地點:" + list[list.length-10].address;
+														})
+												</script>
+												
+											</nav>											
+										</body> 
+									</div>
+								</div>
+						</div>
+					</section>
+
+				<!-- Section -->
+				<section class="wrapper style2">
+					<div class="inner">
+						<div class="flex flex-21">
+							<div class="col col2" style="font-family:Microsoft JhengHei;">
+								<h5>緣起</h5>									
+								<p style="font-size:150%;">AI科技在今日無處不在，小至我們的手機應用，大至國家政策的推動。而在這一風潮下我們能有甚麼作為呢？</p>
+								<p style="font-size:150%;">台灣是一個兼具科技、人文、社會高度發展的小島，然而這裡的行車環境對我們的機車騎士卻不是那麼友善。我們時常可以看到路面上的坑洞懸而未修，或是沒人通報、或是政府疏忽，最後往往造成騎士的危險，甚至賠上性命。</p>
+								<p style="font-size:150%;">我們想要運用我們手中的現有資源，創造一個智慧、敏捷的道路品質偵測系統，藉由駕駛、模型、政府的三方合作，創造一個更友善的騎車環境！</p>								
+							</div>
+							<div class="col col1 first">
+								<div class="image round fit">
+									<img src="images/page_pic.jpg" alt="" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Section -->
+					<section class="wrapper style1">
+						<head></head>
+						<body> 
+							<header class="align-center">
+								<h4>模型成果</h4>								
+							</header>							
+							<div class="flex flex-22">
+								<div class="col col1">
+									<div class="image main fit">
+										<img src="images/ore1" id="img1" alt="">
+									</div>
+								</div>
+								<div class="col col1">
+									<div class="image main fit">
+										<img src="images/pre1" id="img2" alt=""> 
+									</div>
+								</div>									
+							</div>						
+						</body>
+						<script>
+							var k=0;  //當前的索引
+							// Array相當於python裡的list
+							var ss = new Array();
+							var tt = new Array();
+
+							tt[0] = "images/pre1.jpg";
+							tt[1] = "images/pre2.jpg";
+							tt[2] = "images/pre3.jpg";
+							tt[3] = "images/pre4.jpg";
+							tt[4] = "images/pre5.jpg";
+							tt[5] = "images/pre6.jpg";
+							tt[6] = "images/pre7.jpg";
+							tt[7] = "images/pre8.jpg";
+							tt[8] = "images/pre9.jpg";
+							tt[9] = "images/pre10.jpg";
+
+							ss[0] = "images/ori1.jpg";
+							ss[1] = "images/ori2.jpg";
+							ss[2] = "images/ori3.jpg";
+							ss[3] = "images/ori4.jpg";
+							ss[4] = "images/ori5.jpg";
+							ss[5] = "images/ori6.jpg";
+							ss[6] = "images/ori7.jpg";
+							ss[7] = "images/ori8.jpg";
+							ss[8] = "images/ori9.jpg";
+							ss[9] = "images/ori10.jpg";
+							
+							function scrollPic(nn){ 
+								if(k>ss.length-1){k=0;}
+								for(var i=0;i<ss.length;i++){ //遍歷陣列
+									if(i==k){ //如果當前索引等於當前陣列下標
+										document.getElementById("img1").src=ss[i];//改變圖片路徑
+										document.getElementById("img2").src=tt[i];
+									}
+								}
+								k++; //k  ,執行下一次操作
+							}
+							setInterval("scrollPic()",4000); //設定定時器
+						</script> 
+					</section>
+
+				<!-- Section -->
+					<section class="wrapper style2">
+						<div class="inner">
+							<div class="flex flex-21">
+								<!-- style設定內容的字體、大小、限制，最初設定則在CSS裡 -->
+								<div class="col col2" style="font-family:Microsoft JhengHei;">
+									<h5>動手試試</h5>									
+									<p style="font-size:180%;" style="min-width: 30%;">1. 掃描QRcode</p>
+									<p style="font-size:180%;" style="min-width: 30%;">2. 拍下路洞照片並通報 "路見不平" APP</p>
+									<p style="font-size:180%;" href="#main">3. 地圖上出現標記</p>								
+								</div>
+								<div class="col col1 first">
+									<div class="image main fit">
+										<img src="images/QRicon.jpg" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+
+				<!-- Section -->
+					<section class="wrapper style1">
+						<div class="inner">
+							<!DOCTYPE html>										
+								<head>
+									<style>
+										li {																		
+										min-width: 100px;
+										width: 75%;	
+										height: 120%;
+										font-family: 'Trebuchet MS';								
+										}
+									</style>
+								</head>
+							<body>
+							<header class="align-center">
+								<h4>成員介紹</h4>
+								<!-- <p>這是我們的團隊</p> -->
+							</header>
+							<div class="flex flex-3">
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/KHLin.jpg" alt="" />
+									</div>
+										<h2>林冠華</h2>
+										<div class = "col align-left">
+											<li>資料處理</li>
+											<li>AI模型</li>
+											<li>LinechatBot</li>
+											<li>Database</li>
+										</div>
+									<a href="https://www.cakeresume.com/s--sR18IepF2TpFH7mUeWlpTg--/broodkey" class="button">Learn More</a>
+								</div>
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/SYChen.jpg" alt="" />	
+									</div>
+										<h2>陳紹宇</h2>												
+										<div class = "col align-left">
+											<li>資料處理</li>
+											<li>爬蟲</li>
+											<li>AI模型</li>
+											<li>網站架設</li>
+										</div>															
+									<a href="https://www.canva.com/design/DAD2JvMOeC4/xkz2_8Ezf7Vi-fcFIRW-OA/view?utm_content=DAD2JvMOeC4&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu" class="button">Learn More</a>
+								</div>
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/BPWang.jpg" alt="" />
+									</div>
+										<h2>王秉蒲</h2>										
+										<div class = "col align-left">
+											<li>資料處理</li>											
+											<li>AI模型</li>
+											<li>網站架設</li>
+											<p></p>
+										</div>																				
+									<a href="https://drive.google.com/file/d/17AUxyrmrKSVd-NE1jyHWkSB5_y8qAXfe/view?usp=sharing" class="button">Learn More</a>
+								</div>
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/YYLiu.jpg" alt="" />
+									</div>
+										<h2>劉元瑜</h2>
+										<div class = "col align-left">
+											<li>資料處理</li>
+											<li>AI模型</li>
+											<li>LinechatBot</li>
+											<li>Database</li>
+											<li>爬蟲</li>											
+										</div>
+									<a href="https://www.canva.com/design/DADxD9e_JTQ/JX3T5jLmGWZxsWS7dtxgEw/view?utm_content=DADxD9e_JTQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" class="button">Learn More</a>
+								</div>
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/BSTsai.jpg" alt="" />
+									</div>
+										<h2>蔡秉昇</h2>
+										<div class = "col align-left">
+											<li>資料處理</li>
+											<li>爬蟲</li>
+											<li>AI模型</li>
+											<li>LinechatBot</li>
+											<p></p>
+										</div>																
+									<a href="https://www.canva.com/design/DADwNSrcGuM/rUaGAFQxb2YDs9zn-3NYlQ/view?utm_content=DADwNSrcGuM&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink" class="button">Learn More</a>
+								</div>
+
+								<div class="col align-center">
+									<div class="image round fit">
+										<img src="images/pic_member/TJYang.jpg" alt="" />
+									</div>
+										<h2>楊子杰</h2>
+										<div class = "col align-left">
+											<li>資料處理</li>											
+											<li>爬蟲</li>
+											<li>AI模型</li>
+											<p></p>
+											<p></p>
+											<p></p>
+										</div>										
+									<a href="#" class="button">Learn More</a>
+								</div>
+								
+							</div>
+							</body>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="copyright">
+					<!-- <ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+					</ul> -->
+					<p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
