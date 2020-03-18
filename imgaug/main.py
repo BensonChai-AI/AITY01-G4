@@ -129,15 +129,15 @@ if __name__ == "__main__":
 
     # 影像增强
     seq = iaa.Sequential([
-        # iaa.Flipud(0.5),  # vertically flip 20% of all images
-        iaa.Fliplr(0.25),  # 镜像
-        iaa.Multiply((1.0, 1.2)),  # change brightness, doesn't affect BBs
-        iaa.GaussianBlur(sigma=(0, 5.0)),  # iaa.GaussianBlur(0.5),
+        # iaa.Flipud(0.5),  # 垂直鏡像 vertically flip 20% of all images
+        iaa.Fliplr(0.25),  # 左右鏡像
+        iaa.Multiply((1.0, 1.2)),  # 亮化 change brightness, doesn't affect BBs
+        iaa.GaussianBlur(sigma=(0, 5.0)),  # 高斯雜訊
         iaa.Affine(
             translate_px={"x": 50, "y": 50},
             # scale=(0.95, 1.05),
             rotate=(-25, 25),
-            mode='reflect' # reflect or symmetric
+            mode='reflect' # 旋轉後出現的黑影部份以鏡像補上
         )  # translate by 40/60px on x/y axis, and scale to 50-70%, affects BBs
     ])
 
